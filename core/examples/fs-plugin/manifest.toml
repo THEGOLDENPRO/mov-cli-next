@@ -9,6 +9,12 @@ authors = [
 
 [plugin.protocols]
 requires = [
+    # This tells mov-cli how the plugin should be loaded.
+    # 
+    # This exists solely in the case mov-cli introduces a 
+    # new way of loading plugins and it causes a breaking change.
+    "v1/mov-cli.plugin.loader",
+
     # This plugin requires a player that can take a 
     # URL or file (this is the absolute basics of a player).
     # 
