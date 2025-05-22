@@ -1,0 +1,30 @@
+version = 1
+
+[plugin]
+version = "1.0.0"
+name = "example-plugin"
+authors = [
+    "Goldy <goldy@example.com>"
+]
+
+[plugin.protocols]
+requires = [
+    # This plugin requires a player that can take a 
+    # URL or file (this is the absolute basics of a player).
+    # 
+    # For this example however we'll be passing local 
+    # files stored in our system's "Videos" folder to the player.
+    "v1/mov-cli.player.url"
+]
+
+# This plugin plays video files stored in our "/Videos" directory on our operating system.
+# 
+# Technically we can now send file paths to a media player but at the moment 
+# our plugin is useless to mov-cli, because mov-cli needs to be able to call into 
+# our plugin when the user requests various operations like watching and searching for media.
+# 
+# So to do that we need to implement some protocols below, then implement them in our plugin code too.
+implements = [
+    "v1/mov-cli.media.watch",
+    "v1/mov-cli.media.search"
+]

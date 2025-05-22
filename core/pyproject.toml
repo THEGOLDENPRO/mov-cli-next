@@ -1,0 +1,43 @@
+[project]
+name = "mov-core"
+description = "The core of it all!"
+authors = [
+    {name = "Goldy", email = "goldy@devgoldy.xyz"}
+]
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = [
+    "mov-cli",
+    "juno-cli"
+]
+classifiers = [
+    'Operating System :: Microsoft :: Windows :: Windows 11',
+    'Operating System :: Microsoft :: Windows :: Windows 10',
+    'Operating System :: POSIX :: Linux',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+]
+dependencies = []
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "build"
+]
+
+[project.urls]
+GitHub = "https://github.com/THEGOLDENPRO/mov-cli-next"
+BugTracker = "https://github.com/THEGOLDENPRO/mov-cli-next/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "mov_core.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["mov_core*"]
