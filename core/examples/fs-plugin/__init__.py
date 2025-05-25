@@ -13,7 +13,7 @@ def media_watch(metadata: Metadata) -> Media:
     ...
 
 def load_plugin(dispatcher: ProtocolDispatcher):
-    dispatcher.hook("v1/mov-cli.media.search", media_search)
-    dispatcher.hook("v1/mov-cli.media.watch", media_watch)
+    dispatcher.hook("v1/mov-core.media.search", media_search)
+    dispatcher.hook("v1/mov-core.media.watch", media_watch)
 
     ...

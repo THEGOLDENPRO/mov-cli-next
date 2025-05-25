@@ -13,14 +13,14 @@ requires = [
     # 
     # This exists solely in the case mov-cli introduces a 
     # new way of loading plugins and it causes a breaking change.
-    "v1/mov-cli.plugin.loader",
+    "v1/mov-core.plugin.loader",
 
     # This plugin requires a player that can take a 
     # URL or file (this is the absolute basics of a player).
     # 
     # For this example however we'll be passing local 
     # files stored in our system's "Videos" folder to the player.
-    "v1/mov-cli.player.url"
+    "v1/mov-core.player.url"
 ]
 
 # This plugin plays video files stored in our "/Videos" directory on our operating system.
@@ -31,6 +31,6 @@ requires = [
 # 
 # So to do that we need to implement some protocols below, then implement them in our plugin code too.
 implements = [
-    "v1/mov-cli.media.watch",
-    "v1/mov-cli.media.search"
+    "v1/mov-core.media.watch",
+    "v1/mov-core.media.search"
 ]

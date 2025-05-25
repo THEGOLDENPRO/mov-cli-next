@@ -5,6 +5,6 @@ __all__ = (
 )
 
 ProtocolLiteralT = Literal[
-    "v1/mov-cli.media.watch",
-    "v1/mov-cli.media.search",
+    "v1/mov-core.media.watch",
+    "v1/mov-core.media.search",
 ]

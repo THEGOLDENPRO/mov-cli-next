@@ -1,0 +1,37 @@
+# This file is used to generate up to date types and even documentation about the available protocols.
+# The goal is to generate documentation from this and assist type checkers and help our plugin checker
+# development tool warn developers of broken plugins and our information like deprecation of certain protocols.
+
+[protocols."v1/mov-core.plugin.loader"]
+hook = false
+
+# This protocol when required by a plugin tells us that the following plugin 
+# requires a media player from the user that supports streaming from URLs 
+# or reading from files.
+# 
+# This is the BARE minimal of media players so you must require it in your 
+# content plugin and the user's media player plugin must also exempt this protocol.
+[protocols."v1/mov-core.player.url"]
+hook = false
+must_exempt = true
+
+# This protocol when required by a plugin tells us that this plugin 
+# requires a player with support to pass subtitles. This protocol however 
+# doesn't have to be exempted by a media player plugin as missing subtitles 
+# isn't a major breakage.
+[protocols."v1/mov-core.player.subtitles"]
+hook = false
+must_exempt = false
+
+[protocols."v1/mov-core.player.subtitles".platforms]
+android-termux-restricted = { restricted = true }
+
+# This hook protocol is called when a user is requesting to watch a particular piece 
+# of content from your plugin. You probably will want to hook into this together 
+# with the "v1/mov-core.media.search" hook protocol.
+[protocols."v1/mov-core.media.watch"]
+hook = true
+
+# This hook protocol is called when a user requests to query for content in your plugin.
+[protocols."v1/mov-core.media.search"]
+hook = true

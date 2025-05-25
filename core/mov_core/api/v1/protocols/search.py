@@ -10,6 +10,6 @@ __all__ = ("search",)
 # TODO: add search method that will call the search protocols on the dispatcher.
 
 def search(dispatcher: ProtocolDispatcher, query: str) -> Iterable[Metadata]:
-    iterable = dispatcher.call("v1/mov-cli.media.search", query = query)
+    iterable = dispatcher.call("v1/mov-core.media.search", query = query)
 
     return iterable
