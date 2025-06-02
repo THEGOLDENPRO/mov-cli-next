@@ -1,41 +1,45 @@
 from typing import TYPE_CHECKING, Callable
 
 if TYPE_CHECKING:
-    from ...plugins.plugin import Plugin
+    from ... import types
 
-    from ...types import ProtocolLiteralT
+    from ...plugins.plugin import Plugin
 
 __all__ = ("ProtocolDispatcher",)
 
 from .base import Dispatcher
-from ...errors import ProtocolNotImplemented
+from ...errors import ProtocolNotImplemented, ProtocolNotHooked
 
 class ProtocolDispatcher(Dispatcher):
-    def __init__(self, plugin: Plugin):
-        self.plugin = plugin
+    def __init__(self, plugins: tuple[Plugin]):
+        self.__plugins = plugins
 
-        self.__exempted_protocols: list[str] = []
-        self.__bound_protocols: dict[str, Callable[..., any]] = {}
+        self._exempted_protocols: list[str] = []
+        self.__hooked_protocols: dict[str, Callable[..., any]] = {}
 
         super().__init__()
 
-    def call(self, protocol: ProtocolLiteralT, **kwargs):
-        plugin = self.plugin
+    def call(self, protocol: types.ProtocolHookLiteralT, **kwargs):
+        for plugin in self.__plugins:
+            if protocol not in plugin.implemented_protocols:
+                continue
 
-        if protocol not in plugin.implemented_protocols:
-            raise ProtocolNotImplemented(
-                f"The plugin '{plugin.name}' is expected to implement the protocol '{protocol}' but does not! " \
-                    "Contact the developer of the plugin." # TODO: Add contacts of developer or the link to the plugin repo.
-            )
+            callback = self.__hooked_protocols.get(protocol, None)
 
-        raise NotImplementedError()
+            if callback is None:
+                raise ProtocolNotHooked(
+                    f"The implemented protocol '{protocol}' was expected to be hooked in the plugin '{plugin.name}' " \
+                        "but was not! Contact the developer of the plugin." # TODO: Add contacts of developer or the link to the plugin repo.
+                    )
 
-    def hook(self, protocol: ProtocolLiteralT, callback: Callable[..., any]):
-        self.__bound_protocols[protocol] = callback
+            return callback(self, **kwargs)
 
-    def hook_multiple(self, *protocols: ProtocolLiteralT, callback: Callable[..., any]):
-        for protocol in protocols:
-            self.__bound_protocols[protocol] = callback
+        raise ProtocolNotImplemented(
+            f"None of the plugins ('{[f"{plugin} | " for plugin in self.__plugins][:-2]}') implement the '{protocol}' protocol!"
+        )
 
-    def exempt(self, protocol: str):
-        self.__exempted_protocols.append(protocol)
+    def hook(self, protocol: types.ProtocolHookLiteralT, callback: Callable[..., any]):
+        self.__hooked_protocols[protocol] = callback
+
+    def exempt(self, protocol: types.ProtocolExemptLiteralT):
+        self._exempted_protocols.append(protocol)

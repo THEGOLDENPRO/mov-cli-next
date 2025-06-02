@@ -5,3 +5,6 @@ class MovCoreException(Exception):
 
 class ProtocolNotImplemented(MovCoreException):
     ...
+
+class ProtocolNotHooked(MovCoreException):
+    ...

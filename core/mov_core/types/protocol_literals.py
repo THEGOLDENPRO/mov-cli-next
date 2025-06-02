@@ -1,10 +1,17 @@
 from typing import Literal
 
 __all__ = (
-    "ProtocolLiteralT",
+    "ProtocolHookLiteralT",
+    "ProtocolExemptLiteralT"
 )
 
-ProtocolLiteralT = Literal[
-    "v1/mov-core.media.watch",
-    "v1/mov-core.media.search",
+ProtocolHookLiteralT = Literal[
+    "v1/mov-core.media.watch-hook",
+    "v1/mov-core.media.search-hook",
+]
+
+ProtocolExemptLiteralT = Literal[
+    "v1/mov-core.plugin.loader",
+    "v1/mov-core.player.url",
+    "v1/mov-core.player.subtitles",
 ]

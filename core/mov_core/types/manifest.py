@@ -1,6 +1,8 @@
 from typing import TypedDict, NotRequired
 
-__all__ = ()
+__all__ = (
+    "PluginManifestData",
+)
 
 class ProtocolsData(TypedDict):
     requires: list[str]
@@ -9,6 +11,7 @@ class ProtocolsData(TypedDict):
 class PluginData(TypedDict):
     name: str
     authors: list[str]
+    source_code: NotRequired[str]
     protocols: NotRequired[ProtocolsData]
 
 class PluginManifestData(TypedDict):

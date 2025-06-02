@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .manifest import PluginManifestData
+from ..types.manifest import PluginManifestData
 
 __all__ = ()
 

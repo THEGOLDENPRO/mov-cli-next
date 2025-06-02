@@ -18,12 +18,19 @@ if __name__ == "__main__":
 
     search_results = api.search(query)
 
+    choice_list: list[Metadata] = []
+
     for index, search_result in enumerate(search_results):
-        print(f"#{index + 1} - {search_result.name}")
+        print(f"#{index + 1} - {search_result.title}")
 
-    choice = input("\n Enter choice (e.g. 1): ")
+        choice_list.append(search_result)
 
-    # TODO: complete all of this when API is implemented.
-    search_result: Metadata = ...
+    choice = int(input("\n Enter choice (e.g. 1): "))
+    metadata = choice_list[choice - 1]
 
-    api.watch(search_result)
+    # TODO: find a way to tell the plugin what specific episode / season of this content we want 
+    # if the metadata type is multi. I need a very elegant way of doing this in the entire mov-core 
+    # codebase.
+    media = api.watch(metadata)
+
+    # TODO: complete the rest...

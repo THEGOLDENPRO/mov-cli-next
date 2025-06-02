@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 
 __all__ = (
     "Metadata",
+    "MetadataType"
 )
 
 class MetadataType(Enum):

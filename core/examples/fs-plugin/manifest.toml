@@ -31,6 +31,6 @@ requires = [
 # 
 # So to do that we need to implement some protocols below, then implement them in our plugin code too.
 implements = [
-    "v1/mov-core.media.watch",
-    "v1/mov-core.media.search"
+    "v1/mov-core.media.watch-hook",
+    "v1/mov-core.media.search-hook"
 ]

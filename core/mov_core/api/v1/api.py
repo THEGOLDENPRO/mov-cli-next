@@ -23,5 +23,5 @@ class API():
     # TODO: pass some type of object like metadata that
     # we can use to pass to the plugin to make the plugin give
     # us data we can then use to tell a media player to play content.
-    def watch(self):
-        ...
+    def watch(self, metadata: Metadata):
+        return protocols.watch(self.dispatcher, metadata)

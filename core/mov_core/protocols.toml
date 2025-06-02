@@ -29,9 +29,9 @@ android-termux-restricted = { restricted = true }
 # This hook protocol is called when a user is requesting to watch a particular piece 
 # of content from your plugin. You probably will want to hook into this together 
 # with the "v1/mov-core.media.search" hook protocol.
-[protocols."v1/mov-core.media.watch"]
+[protocols."v1/mov-core.media.watch-hook"]
 hook = true
 
 # This hook protocol is called when a user requests to query for content in your plugin.
-[protocols."v1/mov-core.media.search"]
+[protocols."v1/mov-core.media.search-hook"]
 hook = true
